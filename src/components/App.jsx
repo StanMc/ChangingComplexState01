@@ -1,41 +1,51 @@
 import React, { useState } from "react";
 
 function App() {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+  const [fullName, setFullName] = useState({
+    fName: "",
+    lName: ""
+  });
 
-  function onChangeFirstName(event) {
-    console.log("onChangeFirstName()...");
-    setFirstName(event.target.value);
-    console.log(firstName);
-  }
+  /*    
+  
+                      S   T   A  N 
+      On Thursday just resume the video.  She is talking
+      about 'controlled' and 'uncontrolled' form values. 
 
-  function onChangeLastName(event) {
-    console.log("onChangeLastName()...");
-    setLastName(event.target.value);
+      You kind of stopped paying attention after an hour, 
+      so we are going stop here.
+
+
+  */
+
+  function onChangeNameHandler(event) {
+    console.log("onChangeNameHandler()...");
+    const newValue = event.target.value;
+    const inputName = event.target.name;
+    console.log("newValue=" + newValue);
+    console.log("inputName=" + inputName);
   }
 
   function onClickHandler(event) {
-    console.log("onClickHandler()...");
     event.preventDefault();
   }
 
   return (
     <div className="container">
       <h1>
-        Hello {firstName} {lastName}
+        Hello {fullName.fName} {fullName.lName}
       </h1>
       <form>
         <input
           name="fName"
-          value={firstName}
-          onChange={onChangeFirstName}
+          value={fullName.fName}
+          onChange={onChangeNameHandler}
           placeholder="First Name"
         />
         <input
           name="lName"
-          value={lastName}
-          onChange={onChangeLastName}
+          value={fullName.lName}
+          onChange={onChangeNameHandler}
           placeholder="Last Name"
         />
         <button onClick={onClickHandler}>Submit</button>
