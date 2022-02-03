@@ -24,6 +24,36 @@ function App() {
     const inputName = event.target.name;
     console.log("newValue=" + newValue);
     console.log("inputName=" + inputName);
+
+    const { value, name } = event.target;
+
+    function Comment_WrongApproachToSetFullName() {
+      /*  
+      This doesn't work because it creates a new object 
+        each time one of setFullName() functions are called. 
+        So, instead use the proper approach below
+      */
+      if (inputName === "fName") {
+        setFullName({ fname: event.target.value });
+      } else if (inputName === "lName") {
+        setFullName({ lName: event.target.value });
+      }
+    }
+
+    setFullName((prevValue) => {
+      console.log(prevValue);
+      if (name === "fName") {
+        return {
+          fName: value,
+          lName: prevValue.lName
+        };
+      } else if (name === "lName") {
+        return {
+          fName: prevValue.fName,
+          lName: value
+        };
+      }
+    });
   }
 
   function onClickHandler(event) {
